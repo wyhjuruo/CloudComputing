@@ -228,3 +228,107 @@ FLUSH PRIVILEGES;
 ```
 
 ![25](../image/25.png)
+
+最后，退出MySQL的命令行模式：
+
+ 
+
+```
+exit
+```
+
+### （2)安装WordPress
+
+下载WordPress至当前用户的主目录：
+
+ 
+
+```
+cd ~
+wget http://wordpress.org/latest.tar.gz
+```
+
+但是以为现在word press的官网无法登入一次无法通过wget下载所以我使用ftp协议从本地传到云端
+
+![26](../image/26.png)
+
+wget命令从WordPress官方网站下载最新的WordPress集成压缩包，解压该文件：
+
+ 
+
+```
+tar xzvf latest.tar.gz
+```
+
+![27](../image/27.png)解压之后在主目录下产生一个wordpress文件夹。我们将该文件夹下的内容同步到Apache服务器的根目录下，使得wordpress的内容能够被访问。这里使用rsync命令：
+
+ 
+
+```
+sudo rsync -avP ~/wordpress/ /var/www/html/
+```
+
+![28](../image/28.png)接着在Apache服务器目录下为wordpress创建一个文件夹来保存上传的文件：
+
+ 
+
+```
+mkdir /var/www/html/wp-content/uploads
+```
+
+对Apache服务器的目录以及wordpress相关文件夹设置访问权限：
+
+ 
+
+```
+sudo chown -R apache:apache /var/www/html/*
+```
+
+![29](../image/29.png)
+
+### (3)配置WordPress
+
+大多数的WordPress配置可以通过其Web页面完成，但首先通过命令行连接WordPress和MySQL。
+ 定位到wordpress所在文件夹：
+
+ 
+
+```
+cd /var/www/html
+```
+
+WordPress的配置依赖于wp-config.php文件，当前该文件夹下并没有该文件，我们通过拷贝wp-config-sample.php文件来生成：
+
+ 
+
+```
+cp wp-config-sample.php wp-config.php
+```
+
+然后，通过nano超简单文本编辑器来修改配置，主要是MySQL相关配置：
+
+ 
+
+```
+nano wp-config.php
+```
+
+![30](../image/30.png)
+
+### (4)通过Web界面进一步配置WordPress
+
+经过上述的安装和配置，WordPress运行的相关组件已经就绪，接下来通过WordPress提供的Web页面进一步配置。输入你的IP地址或者域名：
+
+ 
+
+```
+http://server_domain_name_or_IP
+```
+
+设置网站的标题，用户名和密码以及电子邮件等，点击**Install WordPress**，弹出确认页面：
+
+点击**Log In**，弹出登录界面：
+
+输入用户名和密码之后，进入WordPress的控制面板：
+
+![31](../image/31.png)
