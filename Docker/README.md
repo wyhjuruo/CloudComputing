@@ -409,3 +409,33 @@ http://49.235.252.33:8888
 设置网站的标题，用户名和密码以及电子邮件等，点击**Install WordPress**
 
 ![53](../image/53.png)
+
+推送镜像到远程镜像仓库
+可以把本地镜像推送到远程镜像仓库，最为著名的就是Docker官方的Docker Hub。当然比如阿里也提供容器仓库，同时也可以自己构建镜像仓库。这里以Docker Hub为例介绍如何实现镜像推送。首先要到Docker Hub上进行注册，然后这里我们使用shell登录
+
+ 
+
+> docker login 
+
+![54](../image/54.png)
+
+将容器生成镜像  (所生成的镜像名由   “Docker用户名/Docker仓库名“组成  ，否则推送会报错： denied: requested access to the resource is denied )
+
+ 
+
+> docker commit -a "1790327727" -m "wordpress on centos7" 53c0f4377406 1790327727/centos:v1
+
+![55](../image/55.png)
+
+使用如下命令推送新创建的镜像：
+
+ 
+
+> docker push 1790327727/centos:v1
+
+![56](../image/56.png)
+
+登录Docker网页查看仓库
+
+![57](../image/57.png)
+
