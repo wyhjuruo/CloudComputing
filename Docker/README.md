@@ -361,7 +361,7 @@ mkdir /var/www/html/wp-content/uploads
 
 ![50](../image/50.png)
 
-### (3)配置WordPress
+### 配置WordPress
 
  
 
@@ -529,3 +529,57 @@ http://49.235.252.33:8800/进行测试
 ![58](D:\github\image\58.png)
 
 ## 2.安装Mysql
+
+
+
+## 3.安装php
+
+### 编辑dockersfile
+
+![59](../image/59.png)
+
+## 生成docker镜像
+
+使用"docker build"命令来生成镜像
+
+```
+docker build -t centos:php .
+```
+
+启动容器：
+
+```
+docker run -td -p 8800:80 -v /data:/var/www/html --name=php centos:php
+```
+
+![60](../image/60.png)
+
+网页
+
+![61](../image/61.png)
+
+## 4.安装wordpress
+
+### 编辑dockersfile
+
+![62](../image/62.png)
+
+## 生成docker镜像
+
+假设当前已经进入到mydocker目录，使用"docker build"命令来生成镜像
+
+```
+docker build -t centos:wordpress .
+```
+
+启动容器：
+
+```
+docker run -td -p 5555:80  --name=wp centos:wordress
+```
+
+![63](../image/63.png)
+
+网页
+
+![64](../image/64.png)
