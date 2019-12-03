@@ -526,7 +526,7 @@ Data are on host but share with volumn /var/www/html on the Docker container.
 
 http://49.235.252.33:8800/进行测试
 
-![58](D:\github\image\58.png)
+![58](../image/58.png)
 
 ## 2.安装Mysql
 
@@ -562,7 +562,7 @@ docker run -td -p 8800:80 -v /data:/var/www/html --name=php centos:php
 
 ### 编辑dockersfile
 
-![62](../image/62.png)
+![62](../image/62 .png)
 
 ## 生成docker镜像
 
