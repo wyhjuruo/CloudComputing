@@ -464,7 +464,7 @@ vim Dockerfile
  
 
 ```
-FROM centos:latest
+FROM centos:7
 LABEL project="Dockerfile for Apache Web"
 
 RUN yum -y install httpd
@@ -473,8 +473,6 @@ EXPOSE 80
 
 VOLUME /var/www/html
 
-ENTRYPOINT [ "/usr/sbin/httpd" ]
-CMD ["-D", "FOREGROUND"]
 ```
 
 ### 生成docker镜像
@@ -482,51 +480,24 @@ CMD ["-D", "FOREGROUND"]
 假设当前已经进入到mydocker目录，使用"docker build"命令来生成镜像
 
 ```
-docker build -t centos:httpd .
+docker build -t centos:httpd1 .
 ```
 
 ### 启动容器实例
 
-首先，为刚才在Dockerfile中VOLUME创建挂载点。在本地主机下创建一个新目录（/data目录），用于挂载Apache Web的根目
-
-录/var/www/html，对应Dockerfile文件中定义的“VOLUME /var/www/html”。
-
-```
-mkdir /data
-```
-
-随后，启动容器：
+启动容器：
 
  为了防止与之前的网站端口冲突所以更改本地映射端口为8800
 
 ```
-docker run -td -p 80:8800 -v /data:/var/www/html --name=web centos:httpd
+docker run -td -p 80:6000 -v /data:/var/www/html --name=web centos:httpd
 ```
 
 ### 验证Apache Web（Httpd）是否安装成功
 
-在/data目录创建index.html文件，由于刚才设定了卷的挂载，index.html将自动挂载到容器的/var/www/html目录，而这个目录是
+![69](../image/69.png)
 
-Apache Web的根目录。
 
-```
-cd /data
-```
-
-```
-vim index.html
-```
-
-添加如下内容：
-
-```
-This is an apache httpd test. Build with dockerfile on CentOS 7.
-Data are on host but share with volumn /var/www/html on the Docker container.
-```
-
-http://49.235.252.33:8800/进行测试
-
-![58](../image/58.png)
 
 ## 2.安装Mysql
 
@@ -549,8 +520,6 @@ docker run -d -p 6600:80 --privileged=true centos:mysql /usr/sbin/init
 
 ```
 
-![60](../image/60.png)
-
 数据库
 
 ![66](../image/66.png)
@@ -572,18 +541,14 @@ docker build -t centos:php1 .
 启动容器：
 
 ```
-docker run -d -p 6600:80 --privileged=true centos:php1 /usr/sbin/init
+docker run -d -p 6660:80 --privileged=true centos:php1 /usr/sbin/init
 ```
-
-![60](../image/60.png)
 
 网页
 
-
+![67](../image/67.png)
 
 ## 4.安装wordpress
-
-## ![67](../image/67.png)
 
 ### 编辑dockersfile
 
@@ -600,7 +565,7 @@ docker build -t centos:wordpress1 .
 启动容器：
 
 ```
-docker run -d -p 6600:80 --privileged=true centos:wordpress1 /usr/sbin/init
+docker run -d -p 6666:80 --privileged=true centos:wordpress1 /usr/sbin/init
 ```
 
 ![63](../image/63.png)
