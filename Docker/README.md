@@ -530,7 +530,30 @@ http://49.235.252.33:8800/进行测试
 
 ## 2.安装Mysql
 
+### 编辑dockersfile
 
+![65](../image/65.png)
+
+## 生成docker镜像
+
+使用"docker build"命令来生成镜像
+
+```
+docker build -t centos:mysql .
+```
+
+启动容器：
+
+```
+docker run -d -p 6600:80 --privileged=true centos:mysql /usr/sbin/init
+
+```
+
+![60](../image/60.png)
+
+数据库
+
+![66](../image/66.png)
 
 ## 3.安装php
 
@@ -543,22 +566,24 @@ http://49.235.252.33:8800/进行测试
 使用"docker build"命令来生成镜像
 
 ```
-docker build -t centos:php .
+docker build -t centos:php1 .
 ```
 
 启动容器：
 
 ```
-docker run -td -p 8800:80 -v /data:/var/www/html --name=php centos:php
+docker run -d -p 6600:80 --privileged=true centos:php1 /usr/sbin/init
 ```
 
 ![60](../image/60.png)
 
 网页
 
-![61](../image/61.png)
+
 
 ## 4.安装wordpress
+
+## ![67](../image/67.png)
 
 ### 编辑dockersfile
 
@@ -569,17 +594,17 @@ docker run -td -p 8800:80 -v /data:/var/www/html --name=php centos:php
 假设当前已经进入到mydocker目录，使用"docker build"命令来生成镜像
 
 ```
-docker build -t centos:wordpress .
+docker build -t centos:wordpress1 .
 ```
 
 启动容器：
 
 ```
-docker run -td -p 5555:80  --name=wp centos:wordress
+docker run -d -p 6600:80 --privileged=true centos:wordpress1 /usr/sbin/init
 ```
 
 ![63](../image/63.png)
 
 网页
 
-![64](../image/64.png)
+![68](../image/68.png)
